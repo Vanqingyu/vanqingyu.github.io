@@ -1,17 +1,30 @@
 ---
 layout: default
 ---
+<article {% if page.feature-img %}class="feature-image"{% endif %}>
+  <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
+    <h1 id="{{ page.title | cgi_escape }}" class="title">{{ page.title }}</h1>
+    <p class="meta">
+    {{ page.date | date: "%B %-d, %Y" }}
+    {% if page.author %} - {{ page.author }}{% endif %}
+    </p>
+  </header>
+  <section class="post-content">{{ content }}</section>
+   
+   <!-- Tag list -->
+  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
+  {% include tags_list.html tags=tag_list %}
+    
+</article>
 
-<body class="body-post">
-  <div class="post-wrapper">
-    <h1 class="post-title"><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h1>
-    <p class="post-date">{{ page.date|date:"%Y-%m-%d" }}</p>
-    {{ content }}
-    {% include disqus.html %}
-  </div>
+<!-- Disqus -->
+{% if site.theme_settings.disqus_shortname %}
+<div class="comments">
+  {% include disqus.html %}
+</div>
+{% endif %}
 
-  {% include about.html %}
-
-  <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-  <script src="/js/post.js" type="text/javascript"></script>
-</body>
+<!-- Post navigation -->
+{% if site.theme_settings.post_navigation %}
+  {% include post_nav.html %}
+{% endif %}
