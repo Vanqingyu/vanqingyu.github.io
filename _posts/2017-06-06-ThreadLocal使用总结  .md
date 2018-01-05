@@ -6,27 +6,19 @@
 `private static final ThreadLocal<Integer> TENANT_ID = new ThreadLocal<>();`
 <br>这正好可以理解，为什么这Spring中Bean都可以声明为singleton作用域，就是因为Spring对于一些Bean（比如RequestContextHolder)采用来ThreadLocal处理非线程安全状态，这样它们就拥有了线程安全的状态，因此可以在多线程中共享了。
 <br>RequestContextHolder部分源码：
-
-RequestContextHolder部分源码：
-
-//得到存储进去的request
+`//得到存储进去的request`
 `private static final ThreadLocal<RequestAttributes> requestAttributesHolder =
-new NamedThreadLocal<RequestAttributes>("Request attributes");//可被子线程继承的request`
-`
-private static final ThreadLocal<RequestAttributes> inheritableRequestAttributesHolder =
-new NamedInheritableThreadLocal<RequestAttributes>("Request context");`
+new NamedThreadLocal<RequestAttributes>("Request attributes");`
+`//可被子线程继承的request`
+`private static final ThreadLocal<RequestAttributes> inheritableRequestAttributesHolder =new NamedInheritableThreadLocal<RequestAttributes>("Request context");`
 
-**总结一下**
-
-一般解决多线程的安全性的两种方法：
-1.加Synchronized，保持并发同步
-2.使用ThreadLocal 本地线程，每个线程一个变量副本
-
+**总结一下：**
+一般解决多线程的安全性的两种方法
+<br>1.加Synchronized，保持并发同步
+<br>2.使用ThreadLocal 本地线程，每个线程一个变量副本
  
 **两种线程安全方案的差异:**
- 
-同步机制是以“时间换空间”，ThreadLocal是以“空间换时间”。
-同步机制提供了一份变量，不同线程排队访问。ThreadLocal为每一个线程提供一份变量，自己访问自己的。
-
-ThreadLocal的缺点很明显，就是占用内存比较大，但速度很快，所以在内存比较充足并且对并发执行效率要求高的情况下，使用ThreadLocal是一个好的选择。
+<br>同步机制是以“时间换空间”，ThreadLocal是以“空间换时间”。
+<br>同步机制提供了一份变量，不同线程排队访问。ThreadLocal为每一个线程提供一份变量，自己访问自己的。
+<br>ThreadLocal的缺点很明显，就是占用内存比较大，但速度很快，所以在内存比较充足并且对并发执行效率要求高的情况下，使用ThreadLocal是一个好的选择。
  
