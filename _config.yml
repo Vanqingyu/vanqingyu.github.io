@@ -1,31 +1,35 @@
-# Permalinks
-permalink:      /:year-:month-:day/:title
+title: 范清宇的博客
+description: > # this means to ignore newlines until "baseurl:"
+  范清宇的博客
+permalink: ':title/'
+baseurl: "/flexible-jekyll" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+site-twitter: #if your site has a twitter account, enter it here
 
-# Setup
-title:          范清宇的博客
-paginate:       5
-baseurl:        ""
-url:            "https://vanqingyu.github.io/tale"
+# Author Settings
+author: 范清宇 # add your name
+author-img: fan.jpeg # add your photo
+about-author: 小清新，程序员，共产主义者，风暴中降生
+twitter: # add your Twitter handle
+facebook: # add your Facebook handle
+github:  # add your Github handle
+linkedin: # add your Linkedin handle
+email: vanqingyu@163.com # add your Email address
 
-# Assets
-sass:
-  sass_dir:     _sass
-  style:        :compressed
+# Disqus
+discus-identifier: mr-brown # add your discus identifier
 
-# Build settings
-markdown:       kramdown
+# Tracker
+analytics: # Google Analytics
 
-# About
-author:
-  name:         范清宇
-  url:          https://vanqingyu.github.io
-  email:        vanqingyu@163.com
-
-# Custom vars
-version:        3.4.1
-github:
-  repo:         https://github.com/chesterhow/tale
-
-# Gems
+# Build Settings
+markdown: kramdown
 plugins:
+  - jekyll-sitemap
   - jekyll-paginate
+  - jemoji
+
+paginate: 8
+paginate_path: "/page/:num"
+
+exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
