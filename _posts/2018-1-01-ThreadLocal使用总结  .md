@@ -1,4 +1,10 @@
 ---
+layout: post
+title: ThreadLocal使用总结 
+date: 2018-01-01 
+tags: Java  
+---
+
 ## ThreadLocal使用总结  
  一般来说，在多线程环境下，如果某个对象是非线程安全的，那么访问对象时必须采用synchronized进行线程同步。然而对于一些Object类，线程同步会降低并发行，影响系统性能，因此没有采用线程同步机制。同时，通过代码来解决线程安全比较困难。因此JDK提供了java.lang.ThreadLocal，为解决Object类多线程并发问题提供了一个新的思路。   
  
